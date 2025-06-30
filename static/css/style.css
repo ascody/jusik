@@ -1,0 +1,95 @@
+body {
+    background: #fff;
+    color: #4b2995;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+}
+
+/* 네비게이터 스타일 */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #d1c4e9;
+    border-bottom: none;
+    box-shadow: none;
+    padding: 0 32px;
+    min-height: 72px;
+    margin: 0;
+}
+.navbar-logo img {
+    height: 32px;
+    filter: drop-shadow(0 2px 4px #d1c4e9);
+}
+.navbar-menu {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+.navbar-menu li {
+    display: inline-block;
+}
+.navbar-menu a {
+    text-decoration: none;
+    color: #6c4ab6;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+}
+.navbar-menu a:hover {
+    color: #a084e8;
+}
+
+/* 검색창 중앙 정렬 및 스타일 */
+.search-center {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.search-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #6c4ab6;
+}
+.search-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.search-input {
+    width: 340px;
+    padding: 0.9rem 1.2rem;
+    font-size: 1.1rem;
+    background: #fff;
+    color: #4b2995;
+    border: 1.5px solid #e3d8fa;
+    border-radius: 2rem;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(155, 89, 182, 0.04);
+}
+.search-input:focus {
+    border: 1.5px solid #a084e8;
+    box-shadow: 0 2px 12px rgba(160, 132, 232, 0.10);
+}
+
+/* 버튼 등 추가 요소에 대비한 연보라색 스타일 예시 */
+.button, button {
+    background: linear-gradient(90deg, #a084e8 0%, #f3f0ff 100%);
+    color: #4b2995;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 0.7rem 1.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.button:hover, button:hover {
+    background: linear-gradient(90deg, #ede9fe 0%, #a084e8 100%);
+    color: #6c4ab6;
+} 
