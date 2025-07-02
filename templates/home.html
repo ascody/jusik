@@ -1,16 +1,63 @@
 {% extends "base.html" %} {% block content %}
 <div class="search-center">
 	<h1 class="search-title">포트폴리오 관리</h1>
-	<form class="search-form">
+	<form
+		class="search-form"
+		onsubmit="return false;"
+		style="
+			position: relative;
+			display: inline-block;
+			width: 100%;
+			max-width: 400px;
+		"
+	>
 		<input
 			type="text"
 			class="search-input"
+			id="search-input"
 			value="종목 검색"
 			onfocus="if(this.value=='종목 검색')this.value=''"
 			onblur="if(this.value=='')this.value='종목 검색'"
+			style="padding-right: 36px"
 		/>
+		<button
+			type="button"
+			class="search-icon-btn"
+			tabindex="-1"
+			style="
+				position: absolute;
+				right: 15px;
+				top: 50%;
+				transform: translateY(-50%);
+				background: none;
+				border: none;
+				padding: 0;
+				cursor: pointer;
+			"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="20"
+				height="20"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="#aaa"
+				style="opacity: 0.6"
+			>
+				<circle cx="11" cy="11" r="7" stroke-width="2" />
+				<line
+					x1="16.5"
+					y1="16.5"
+					x2="21"
+					y2="21"
+					stroke-width="2"
+					stroke-linecap="round"
+				/>
+			</svg>
+		</button>
 	</form>
+	<div id="search-results" class="search-results"></div>
 </div>
 {% endblock %} {% block script %}
-<script src="{{ url_for('static', filename='js/home.js') }}" defer></script>
+	<script src="{{ url_for('static', filename='js/home.js') }}" defer></script>
 {% endblock %}
