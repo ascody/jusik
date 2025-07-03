@@ -6,17 +6,45 @@ document.addEventListener('DOMContentLoaded', function () {
     let timer = null;
 
     function renderResults(data) {
+        resultsDiv.innerHTML = "";  // 결과 초기화
+
         if (data.error) {
-            resultsDiv.innerHTML = `<div class="error">${data.error}</div>`;
+            const errorDiv = document.createElement("div");
+            errorDiv.className = "error";
+            errorDiv.textContent = data.error;
+            resultsDiv.appendChild(errorDiv);
             return;
         }
+
         if (data.length === 0) {
-            resultsDiv.innerHTML = '<div class="no-result">검색 결과가 없습니다.</div>';
+            const noResultDiv = document.createElement("div");
+            noResultDiv.className = "no-result";
+            noResultDiv.textContent = "검색 결과가 없습니다.";
+            resultsDiv.appendChild(noResultDiv);
             return;
         }
-        resultsDiv.innerHTML = data.map(stock =>
-            `<div class="result-item">${stock.name || stock.kr_name} (${stock.code}) [${stock.market}]</div>`
-        ).join('');
+
+        data.forEach(stock => {
+            const itemDiv = document.createElement("div");
+            itemDiv.className = "result-item";
+            itemDiv.dataset.code = stock.code;
+            itemDiv.dataset.market = stock.market;
+
+            itemDiv.innerHTML = `
+                <strong>${stock.name || stock.kr_name}</strong>
+                <span style="margin-left: 8px; color: gray;">(${stock.code})</span>
+                <span style="float: right; color: #888;">[${stock.market}]</span>
+            `;
+
+            // 선택 시 input에 값 넣고 리스트 닫기
+            itemDiv.addEventListener("click", () => {
+                input.value = `${stock.name || stock.kr_name} (${stock.code})`;
+                resultsDiv.innerHTML = "";
+                // TODO: 상세보기 이동하거나 포트폴리오에 추가 등 다른 동작 가능
+            });
+
+            resultsDiv.appendChild(itemDiv);
+        });
     }
 
     function fetchAutocomplete() {
