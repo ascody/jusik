@@ -64,7 +64,7 @@ body {
 .search-input {
     left: 50%;
     transform: translateX(-15%);
-    width: 500px;
+    width: 510px;
     padding: 0.9rem 1.2rem;
     font-size: 1.1rem;
     background: #fff;
@@ -83,7 +83,7 @@ body {
     position: relative;
     top: 100%;
     left: 0;
-    width: 500px;
+    width: 510px;
     border: 1px solid #ccc;
     border-top: none;
     background-color: white;
@@ -97,13 +97,26 @@ body {
 }
 
 .result-item {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    cursor: pointer;
-    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
 }
-.result-item:hover {
-    background-color: #f5f5f5;
+.result-item .star-icon {
+    font-size: 1.3em;
+    color: gold;
+}
+.result-item strong {
+    flex-shrink: 0;
+}
+.result-item .symbol {
+    min-width: 80px;
+    color: gray;
+}
+.result-item .market {
+    margin-left: auto;
+    color: #888;
+    white-space: nowrap;
 }
 
 /* 버튼 등 추가 요소에 대비한 연보라색 스타일 예시 */

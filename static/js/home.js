@@ -31,16 +31,61 @@ document.addEventListener('DOMContentLoaded', function () {
             itemDiv.dataset.market = stock.market;
 
             itemDiv.innerHTML = `
+                <span class="star-icon" style="cursor:pointer; font-size: 1.3em; color: #ccc; margin-right: 8px;">☆</span>
                 <strong>${stock.name || stock.kr_name}</strong>
-                <span style="margin-left: 8px; color: gray;">(${stock.code})</span>
+                <span style="margin-left: 8px; color: gray;">(${stock.symbol})</span>
                 <span style="float: right; color: #888;">[${stock.market}]</span>
             `;
 
-            // 선택 시 input에 값 넣고 리스트 닫기
+            // 별 토글 기능
+            const star = itemDiv.querySelector('.star-icon');
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+            if (favorites.some(s => s.symbol === stock.symbol)) {
+                star.textContent = '★';
+                star.style.color = 'gold';
+            } else {
+                star.textContent = '☆';
+                star.style.color = '#ccc';
+            }
+
+            star.addEventListener('click', function (e) {
+                e.stopPropagation();
+            
+                let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+                const symbol = stock.symbol;
+
+                if (star.textContent === '☆') {
+                    star.textContent = '★';
+                    star.style.color = 'gold';
+
+                    if (!favorites.some(s => s.symbol === symbol)) {
+                        favorites.push({
+                            symbol: stock.symbol,
+                            name: stock.name || stock.kr_name,
+                            market: stock.market
+                        });
+                        localStorage.setItem('favorites', JSON.stringify(favorites));
+                    }
+                    
+                } else {
+                    const confirmed = confirm('제거하시겠습니까?');
+                    
+                    if (confirmed) {
+                        star.textContent = '☆';
+                        star.style.color = '#ccc';
+
+                        favorites = favorites.filter(s => s.symbol !== stock.symbol);
+                        localStorage.setItem('favorites', JSON.stringify(favorites));
+                    }
+                }
+            });
+
+            // 종목 선택 시 input에 값 넣고 자동완성 닫기
             itemDiv.addEventListener("click", () => {
-                input.value = `${stock.name || stock.kr_name} (${stock.code})`;
+                input.value = `${stock.name || stock.kr_name} (${stock.symbol})`;
                 resultsDiv.innerHTML = "";
-                // TODO: 상세보기 이동하거나 포트폴리오에 추가 등 다른 동작 가능
+                // TODO: 상세보기 이동, 포트폴리오 추가 등
             });
 
             resultsDiv.appendChild(itemDiv);
